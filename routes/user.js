@@ -7,8 +7,9 @@ const comma = require("../utils/comma");
 const Deposit = require("../model/Deposit");
 const uuid = require("uuid");
 const Withdraw = require("../model/Withdraw");
+const checkVerification = require("../config/verify");
 
-router.get("/dashboard", ensureAuthenticated, (req, res) => {
+router.get("/dashboard", ensureAuthenticated, checkVerification, (req, res) => {
     try {
         return res.render("dashboard", { res, pageTitle: "Dashboard", req, comma, layout: "layout2" });
     } catch (err) {
@@ -16,7 +17,15 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
     }
 });
 
-router.get("/deposit", ensureAuthenticated, async (req, res) => {
+router.get("/locked", ensureAuthenticated, async (req, res) => {
+    try {
+        return res.render("locked", { res, pageTitle: "Locked", req, comma, layout: "layout2" });
+    } catch (err) {
+        return res.redirect("/locked");
+    }
+});
+
+router.get("/deposit", ensureAuthenticated, checkVerification, async (req, res) => {
     try {
         const deposits = await Deposit.find({ userID: req.user.id });
         return res.render("deposit", { res, pageTitle: "Deposit", deposits, req, comma, layout: "layout2" });
@@ -25,7 +34,7 @@ router.get("/deposit", ensureAuthenticated, async (req, res) => {
     }
 });
 
-router.post("/deposit", ensureAuthenticated, async (req, res) => {
+router.post("/deposit", ensureAuthenticated, checkVerification, async (req, res) => {
     try {
         const {
             method,
@@ -67,7 +76,7 @@ router.post("/deposit", ensureAuthenticated, async (req, res) => {
     }
 });
 
-router.get("/withdraw", ensureAuthenticated, async (req, res) => {
+router.get("/withdraw", ensureAuthenticated, checkVerification, async (req, res) => {
     try {
         const withdrawals = await Withdraw.find({ userID: req.user.id });
         return res.render("withdraw", { res, pageTitle: "Deposit", withdrawals, req, comma, layout: "layout2" });
@@ -76,7 +85,7 @@ router.get("/withdraw", ensureAuthenticated, async (req, res) => {
     }
 });
 
-router.post("/withdraw", ensureAuthenticated, async (req, res) => {
+router.post("/withdraw", ensureAuthenticated, checkVerification, async (req, res) => {
     try {
         const {
             method,
@@ -127,7 +136,7 @@ router.post("/withdraw", ensureAuthenticated, async (req, res) => {
     }
 });
 
-router.get("/upgrade", ensureAuthenticated, (req, res) => {
+router.get("/upgrade", ensureAuthenticated, checkVerification, (req, res) => {
     try {
         return res.render("upgrade", { res, pageTitle: "Deposit", req, comma, layout: "layout2" });
     } catch (err) {
@@ -144,7 +153,7 @@ router.get("/transactions", ensureAuthenticated, async (req, res) => {
     }
 });
 
-router.get("/trade-history", ensureAuthenticated, (req, res) => {
+router.get("/trade-history", ensureAuthenticated, checkVerification, (req, res) => {
     try {
         return res.render("tradeHistory", { res, pageTitle: "Trade History", req, comma, layout: "layout2" });
     } catch (err) {
@@ -152,7 +161,7 @@ router.get("/trade-history", ensureAuthenticated, (req, res) => {
     }
 });
 
-router.get("/update-password", ensureAuthenticated, (req, res) => {
+router.get("/update-password", ensureAuthenticated, checkVerification, (req, res) => {
     try {
         return res.render("updatePassword", { res, pageTitle: "Update Password", req, comma, layout: "layout2" });
     } catch (err) {
@@ -160,7 +169,7 @@ router.get("/update-password", ensureAuthenticated, (req, res) => {
     }
 });
 
-router.post("/update-password", ensureAuthenticated, async (req, res) => {
+router.post("/update-password", ensureAuthenticated, checkVerification, async (req, res) => {
     try {
         const { currentPassword, password, password2 } = req.body;
 
@@ -193,7 +202,7 @@ router.post("/update-password", ensureAuthenticated, async (req, res) => {
 });
 
 
-router.get("/top-investors", ensureAuthenticated, (req, res) => {
+router.get("/top-investors", ensureAuthenticated, checkVerification, (req, res) => {
     try {
         return res.render("topInvestor", { res, pageTitle: "Top Investors", req, comma, layout: "layout2" });
     } catch (err) {

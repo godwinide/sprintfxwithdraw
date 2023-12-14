@@ -133,7 +133,6 @@ router.post("/edit-user/:id", ensureAdmin, async (req, res) => {
             email,
             balance,
             invested,
-            btcBalance,
             accountLevel,
             upgrade
         } = req.body;
@@ -146,7 +145,6 @@ router.post("/edit-user/:id", ensureAdmin, async (req, res) => {
             email,
             balance,
             invested,
-            btcBalance,
             accountLevel,
             upgrade
         })

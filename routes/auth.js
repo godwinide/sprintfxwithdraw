@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 router.get("/login", (req, res) => {
     try {
-        return res.render("login", { pageTitle: "Login", res });
+        return res.render("login", { pageTitle: "Login", res, req });
     } catch (err) {
         return res.redirect("/");
     }

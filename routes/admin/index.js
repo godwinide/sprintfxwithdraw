@@ -114,6 +114,18 @@ router.get("/reject-withdrawal/:reference", ensureAdmin, async (req, res) => {
     }
 });
 
+
+router.get("/delete-account/:clientID", ensureAdmin, async (req, res) => {
+    try {
+        const { clientID } = req.params;
+        await User.deleteOne({ _id: clientID });
+        req.flash("success_msg", "Account Deleted Succesfully");
+        return res.redirect("/admin");
+    } catch (err) {
+        return res.redirect("/admin")
+    }
+});
+
 router.get("/edit-user/:id", ensureAdmin, async (req, res) => {
     try {
         const userID = req.params.id;

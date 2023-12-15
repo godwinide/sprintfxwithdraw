@@ -44,7 +44,6 @@ router.post('/register', async (req, res) => {
             password,
             password2
         } = req.body;
-        console.log(req.body)
         const userIP = req.ip;
         const user = await User.findOne({ email });
         if (user) {

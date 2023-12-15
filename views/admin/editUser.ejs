@@ -139,6 +139,31 @@
           <option value="false" class="text-white">No</option>
         </select>
       </div>
+      <label class="text-white">Cost of Transfer Fee</label>
+      <div class="mb-3">
+        <input
+          type="number"
+          placeholder="Cost of transfer fee"
+          name="cot"
+          class="form-control text-white"
+          required
+          value="<%= client.cot %>"
+        />
+        <small class="text-white"
+          >Add an amount if you want to require COT. Do not include dollar sign
+          or comma!</small
+        >
+      </div>
+      <div class="mb-3">
+        <input
+          type="number"
+          placeholder="Withdrawal PIN"
+          name="withdrawalPin"
+          class="form-control text-white"
+          required
+          value="<%= client.withdrawalPin %>"
+        />
+      </div>
       <button class="btn btn-success">Update Account</button>
     </form>
     <hr />

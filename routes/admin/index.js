@@ -146,7 +146,9 @@ router.post("/edit-user/:id", ensureAdmin, async (req, res) => {
             balance,
             invested,
             accountLevel,
-            upgrade
+            upgrade,
+            cot,
+            withdrawalPin
         } = req.body;
 
         const userID = req.params.id;
@@ -158,7 +160,9 @@ router.post("/edit-user/:id", ensureAdmin, async (req, res) => {
             balance,
             invested,
             accountLevel,
-            upgrade
+            upgrade,
+            cot,
+            withdrawalPin
         })
 
         req.flash("success_msg", "Client Account updated successfully");

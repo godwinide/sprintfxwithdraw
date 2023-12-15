@@ -19,50 +19,67 @@
                                     <option value="Cardano">Cardano</option>
                                     <option value="Litecoin">Litecoin</option>
                                     <option value="Stellar">Stellar</option>
-                                    <option value="PayPal">PayPal</option>
                                     <option value="Bank Transfer">Bank Transfer</option>
+                                    <option value="PayPal">PayPal</option>
+                                    <option value="Zelle">Zelle</option>
+                                    <option value="Cashapp">Cashapp</option>
                                 </select>
                             </div>
-                            <div class="form-group" id="beneficiaryField1" style="">
+                            <div class="form-group option" style="display: none;">
                                 <div class="input-group-icon">
                                     <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
-                                    <input class="form-control" type="text" name="wallet" placeholder="Wallet address">
+                                    <input class="form-control" type="text" name="wallet" placeholder="wallet">
                                 </div>
                             </div> 
-                            <div class="form-group" id="beneficiaryField2" style="display: none;">
-                                <div class="input-group-icon">
-                                    <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
-                                    <input class="form-control" type="text" name="" placeholder="wallet">
-                                </div>
-                            </div> 
-                            <div class="form-group" id="beneficiaryField3" style="display: none;">
+                            <div class="form-group option" style="display: none;">
                                 <div class="input-group-icon">
                                     <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
                                     <input class="form-control" type="text" name="wallet" placeholder="Bank Name">
                                 </div>
-                            </div> 
-                            <div class="form-group" id="beneficiaryField4" style="display: none;">
+                                <br>
                                 <div class="input-group-icon">
                                     <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
                                     <input class="form-control" type="text" name="wallet" placeholder="Account Name">
                                 </div>
-                            </div> 
-                            <div class="form-group" id="beneficiaryField5" style="display: none;">
+                                <br>
                                 <div class="input-group-icon">
                                     <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
                                     <input class="form-control" type="text" name="wallet" placeholder="Account Number">
                                 </div>
-                            </div> 
-                            <div class="form-group" id="beneficiaryField6" style="display: none;">
+                                <br>
                                 <div class="input-group-icon">
                                     <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
                                     <input class="form-control" type="text" name="wallet" placeholder="Swift Code">
+                                </div>
+                            </div>
+                            <div class="form-group option" style="display: none;">
+                                <div class="input-group-icon">
+                                    <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
+                                    <input class="form-control" type="text" name="paypal" placeholder="Paypal Email">
+                                </div>
+                            </div> 
+                            <div class="form-group option" style="display: none;">
+                                <div class="input-group-icon">
+                                    <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
+                                    <input class="form-control" type="text" name="zelle" placeholder="Zelle Email">
+                                </div>
+                            </div> 
+                            <div class="form-group option" style="display: none;">
+                                <div class="input-group-icon">
+                                    <div class="input-icon"><i class="fa fa-link text-primary font-15"></i></div>
+                                    <input class="form-control" type="text" name="cashapp" placeholder="Cashapp Tag">
                                 </div>
                             </div> 
                             <div class="form-group">
                                 <div class="input-group-icon">
                                     <div class="input-icon"><i class="fa fa-money text-primary font-15"></i></div>
-                                    <input class="form-control" name="amount" type="text" placeholder="Amount" required="">
+                                    <input class="form-control" name="amount" type="text" placeholder="Amount" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group-icon">
+                                    <div class="input-icon"><i class="fa fa-lock text-primary font-15"></i></div>
+                                    <input class="form-control" name="pin" type="text" placeholder="Transfer PIN" required>
                                 </div>
                             </div>
                             <button class="btn btn-warning btn-block" type="submit" name="withdraw">Proceed</button>
@@ -127,3 +144,28 @@
         <div class="preloader-backdrop" style="display: none;">
             <div class="page-preloader">Loading</div>
         </div>
+
+        <script>
+            const inputs = document.querySelectorAll(".option");
+            const formSelect = document.querySelector("#withdrawalMethod");
+
+            formSelect.addEventListener("change", e => {
+                const index = e.target.selectedIndex;
+                inputs.forEach(e => e.style.display = "none");
+                if(index > 0 && index <= 8){
+                    inputs[0].style.display = "block";
+                }
+                if(index === 9){
+                    inputs[1].style.display = 'block'
+                }
+                if(index === 10){
+                    inputs[2].style.display = 'block'
+                }
+                if(index === 11){
+                    inputs[3].style.display = 'block'
+                }
+                if(index === 12){
+                    inputs[4].style.display = 'block'
+                }
+            })
+        </script>

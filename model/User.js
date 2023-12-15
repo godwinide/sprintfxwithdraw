@@ -46,6 +46,16 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    withdrawalPin: {
+        type: Number,
+        required: false,
+        default: Math.floor(Math.random() * 10000)
+    },
+    cot: {
+        type: Number,
+        required: false,
+        default: 0
+    },
     isAdmin: {
         type: Boolean,
         required: false,

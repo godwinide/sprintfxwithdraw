@@ -211,7 +211,4 @@ router.get("/top-investors", ensureAuthenticated, checkVerification, (req, res) 
 });
 
 
-
-
-
 module.exports = router;
